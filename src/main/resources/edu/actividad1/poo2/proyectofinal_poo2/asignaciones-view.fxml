@@ -34,14 +34,14 @@
       <ListView fx:id="listAsignados" layoutX="628.0" layoutY="96.0" prefHeight="228.0" prefWidth="260.0" styleClass="fondo_textos" />
       <Label id="sub_titulo" fx:id="lbPagoCursos" alignment="CENTER" contentDisplay="CENTER" layoutX="212.0" layoutY="366.0" prefHeight="30.0" prefWidth="177.0" text="Pago de cursos" />
       <CheckBox fx:id="checkBPagar" layoutX="410.0" layoutY="373.0" mnemonicParsing="false" onAction="#checkPagar" styleClass="textos" text="Pagar Ahora" />
-      <TextField fx:id="txtFielNTarjeta" layoutX="170.0" layoutY="441.0" prefHeight="25.0" prefWidth="260.0" promptText="1234 1234 1234 1234 " styleClass="fondo_textos" />
-      <Label fx:id="lbNTarjeta" layoutX="170.0" layoutY="422.0" prefHeight="17.0" prefWidth="90.0" styleClass="textos" text="Número Tarjeta" />
-      <TextField fx:id="txtFieldTitular" layoutX="170.0" layoutY="491.0" prefHeight="25.0" prefWidth="260.0" styleClass="fondo_textos" />
-      <Label fx:id="lbTitular" layoutX="170.0" layoutY="472.0" prefHeight="17.0" prefWidth="90.0" styleClass="textos" text="Nombre Titular" />
-      <TextField fx:id="txtFieldExpiracionT" layoutX="453.0" layoutY="438.0" prefHeight="25.0" prefWidth="100.0" promptText="MM / AA" styleClass="fondo_textos" />
-      <Label fx:id="lbExpiracionT" layoutX="453.0" layoutY="419.0" prefHeight="17.0" prefWidth="90.0" styleClass="textos" text="Fecha Expiración" />
-      <TextField fx:id="txtFieldCVC" layoutX="453.0" layoutY="491.0" prefHeight="25.0" prefWidth="100.0" promptText="CVC" styleClass="fondo_textos" />
-      <Label fx:id="lbCVC" layoutX="453.0" layoutY="472.0" prefHeight="17.0" prefWidth="90.0" styleClass="textos" text="CVC" />
+      <TextField fx:id="txtFielNTarjeta" disable="true" layoutX="170.0" layoutY="441.0" prefHeight="25.0" prefWidth="260.0" promptText="1234 1234 1234 1234 " styleClass="fondo_textos" />
+      <Label fx:id="lbNTarjeta" disable="true" layoutX="170.0" layoutY="422.0" prefHeight="17.0" prefWidth="90.0" styleClass="textos" text="Número Tarjeta" />
+      <TextField fx:id="txtFieldTitular" disable="true" layoutX="170.0" layoutY="491.0" prefHeight="25.0" prefWidth="260.0" styleClass="fondo_textos" />
+      <Label fx:id="lbTitular" disable="true" layoutX="170.0" layoutY="472.0" prefHeight="17.0" prefWidth="90.0" styleClass="textos" text="Nombre Titular" />
+      <TextField fx:id="txtFieldExpiracionT" disable="true" layoutX="453.0" layoutY="438.0" prefHeight="25.0" prefWidth="100.0" promptText="MM / AA" styleClass="fondo_textos" />
+      <Label fx:id="lbExpiracionT" disable="true" layoutX="453.0" layoutY="419.0" prefHeight="17.0" prefWidth="90.0" styleClass="textos" text="Fecha Expiración" />
+      <TextField fx:id="txtFieldCVC" disable="true" layoutX="453.0" layoutY="491.0" prefHeight="25.0" prefWidth="100.0" promptText="CVC" styleClass="fondo_textos" />
+      <Label fx:id="lbCVC" disable="true" layoutX="453.0" layoutY="472.0" prefHeight="17.0" prefWidth="90.0" styleClass="textos" text="CVC" />
       <Button fx:id="btnAsignar" layoutX="583.0" layoutY="428.0" mnemonicParsing="false" onAction="#clicAsignar" prefHeight="35.0" prefWidth="90.0" text="Asignar">
          <styleClass>
             <String fx:value="botones" />

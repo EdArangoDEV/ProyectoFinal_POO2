@@ -148,16 +148,3 @@
    -fx-opacity: 0.90; /* Color al pasar el mouse sobre la celda */
 }
 
-
-/*
-"workbench.colorCustomizations": {
-    "editor.background": "#282c34", // Color de fondo del editor
-    "editor.foreground": "#abb2bf", // Color del texto en el editor
-    "editor.selectionBackground": "#3e4451", // Color de fondo de la selección
-    "button.background": "#61afef", // Color de fondo de los botones
-    "button.foreground": "#ffffff", // Color del texto en los botones
-    "button.hoverBackground": "#528bff", // Color de fondo al pasar el mouse sobre el botón
-    "activityBar.background": "#21252b", // Color de fondo de la barra de actividad
-    "sideBar.background": "#21252b" // Color de fondo de la barra lateral
-}
-*/
