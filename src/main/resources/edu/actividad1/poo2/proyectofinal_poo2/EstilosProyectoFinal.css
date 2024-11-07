@@ -1,0 +1,163 @@
+#Background {
+    -fx-background-color: #1e1e1e;
+}
+
+#titulo {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 18px;
+    -fx-font-family: comic-saens;
+    -fx-font-weight: bold;
+}
+
+#sub_titulo {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-font-family: comic-saens;
+}
+
+
+.textos {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12px;
+    -fx-font-family: comic-saens;
+}
+
+.fondo_textos {
+    -fx-background-color: #3c3c3c;
+    -fx-text-fill: #ffffff;
+}
+
+.botones {
+    -fx-font-size: 12.5px;
+    -fx-text-fill: #ffffff;
+    -fx-border-radius: 10px;
+    -fx-background-color: #528bff;
+    cursor: pointer;
+}
+
+.boton_regresar {
+    -fx-font-size: 12.5px;
+    -fx-text-fill: #ffffff;
+    -fx-border-radius: 10px;
+    -fx-background-color: #3c3c3c;
+    -fx-cursor: pointer;
+}
+
+
+.boton_cancelar {
+    -fx-font-size: 12.5px;
+    -fx-text-fill: #ffffff;
+    -fx-border-radius: 10px;
+    -fx-background-color: #c02723;
+    -fx-cursor: pointer;
+}
+
+.botones_m:hover {
+    /*-fx-background-color: #61afef; /* Color de fondo al pasar el mouse */
+    -fx-opacity: 0.90;
+}
+
+
+/* Cambiar el color de fondo del campo de texto del DatePicker */
+.date-picker .text-field {
+    -fx-background-color: #3c3c3c; /* Color de fondo del campo de texto */
+    -fx-text-fill: #ffffff; /* Color del texto */
+}
+
+
+/* Cambiar el color de fondo del botón desplegable */
+.date-picker .arrow-button {
+    -fx-background-color: #528bff; /* Color de fondo del botón */
+    -fx-text-fill: #ffffff; /* Color del texto del botón */
+}
+
+
+/* Efecto hover para el botón desplegable */
+.date-picker .arrow-button:hover {
+    -fx-opacity: 0.90; /* Color al pasar el mouse sobre el botón */
+}
+
+/* Cambiar el color de fondo de las celdas en el calendario */
+.date-picker .cell {
+    -fx-background-color: #528bff;
+    -fx-background-color: #ffffff; /* Color de fondo de las celdas */
+}
+
+/* Efecto hover para las celdas */
+.date-picker .cell:hover {
+    -fx-background-color: #e0e0e0; /* Color al pasar el mouse sobre la celda */
+}
+
+/* Cambiar el color de la celda seleccionada */
+.date-picker .selected {
+    -fx-background-color: #528bff; /* Color de fondo de la celda seleccionada */
+}
+
+
+
+/* Cambiar el color de fondo del encabezado de la tabla */
+.table-view .column-header {
+    -fx-background-color: #3c3c3c; /* Color de fondo del encabezado */
+    -fx-text-fill: #ffffff; /* Color del texto en el encabezado */
+    -fx-border-width: 0 1px 0 0; /* Solo el borde derecho */
+}
+
+
+/* Estilo para las etiquetas dentro del encabezado */
+.table-view .column-header .label {
+    -fx-text-fill: #ffffff; /* Color del texto en las etiquetas del encabezado */
+    -fx-font-size: 12.5px; /* Tamaño de fuente */
+    -fx-font-family: comic-saens;
+}
+
+
+/* Cambiar el color de fondo del cuerpo de la tabla */
+.table-view .table-row-cell {
+    -fx-background-color: #3c3c3c; /* Color de fondo por defecto para las filas */
+    -fx-text-fill: #ffffff; /* Color del texto por defecto */
+}
+
+
+/* Cambiar el color de fondo del área del encabezado del calendario */
+.date-picker-popup .month-year-pane{
+    -fx-background-color: #3c3c3c; /* Color de fondo para el encabezado */
+    -fx-text-fill: #ffffff;
+}
+
+/* Cambiar el color de fondo del área del encabezado del calendario */
+.date-picker-popup .month-year-pane .label{
+    -fx-text-fill: #ffffff;
+}
+
+/* Cambiar el color de fondo de las celdas en la lista desplegable */
+.combo-box .list-cell {
+    -fx-background-color: #3c3c3c; /* Color de fondo de las celdas */
+    -fx-text-fill: #ffffff; /* Color del texto en las celdas */
+}
+
+
+/* Cambiar el color de la celda seleccionada */
+.combo-box .list-cell:selected {
+    -fx-background-color: #3c3c3c; /* Color de fondo de la celda seleccionada */
+    -fx-text-fill: #ffffff; /* Color del texto en la celda seleccionada */
+}
+
+
+/* Efecto hover para las celdas en la lista desplegable */
+.combo-box .list-cell:hover {
+   -fx-opacity: 0.90; /* Color al pasar el mouse sobre la celda */
+}
+
+
+/*
+"workbench.colorCustomizations": {
+    "editor.background": "#282c34", // Color de fondo del editor
+    "editor.foreground": "#abb2bf", // Color del texto en el editor
+    "editor.selectionBackground": "#3e4451", // Color de fondo de la selección
+    "button.background": "#61afef", // Color de fondo de los botones
+    "button.foreground": "#ffffff", // Color del texto en los botones
+    "button.hoverBackground": "#528bff", // Color de fondo al pasar el mouse sobre el botón
+    "activityBar.background": "#21252b", // Color de fondo de la barra de actividad
+    "sideBar.background": "#21252b" // Color de fondo de la barra lateral
+}
+*/
