@@ -97,6 +97,14 @@ public class AsignacionController {
     @FXML
     private TextField txtFieldTitular;
 
+
+    // referencia al archivo de aplicacion para comunicacion
+    Application app;
+
+    public void setMain(Application main){
+        this.app = main;
+    }
+
     @FXML
     void checkPagar(ActionEvent event) {
 
@@ -114,7 +122,8 @@ public class AsignacionController {
 
     @FXML
     void clicRegresar(ActionEvent event) {
-
+        app.principalStage.show();
+        app.asignacionesStage.hide();
     }
 
 }

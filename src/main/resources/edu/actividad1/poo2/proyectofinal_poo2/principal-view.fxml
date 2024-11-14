@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="Background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="350.0" stylesheets="@EstilosProyectoFinal.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.actividad1.poo2.proyectofinal_poo2.HelloController">
+<AnchorPane id="Background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="350.0" stylesheets="@EstilosProyectoFinal.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.actividad1.poo2.proyectofinal_poo2.ApplicationController">
    <children>
       <Button fx:id="btnAsignaciones" layoutX="101.0" layoutY="133.0" mnemonicParsing="false" onAction="#clicAsignaciones" prefHeight="35.0" prefWidth="150.0" text="Asignaciones Cursos">
          <styleClass>

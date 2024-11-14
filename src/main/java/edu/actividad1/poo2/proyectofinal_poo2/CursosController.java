@@ -8,6 +8,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
+
 public class CursosController {
 
     @FXML
@@ -37,9 +39,18 @@ public class CursosController {
     @FXML
     private Label lbTablaAlumnos;
 
-    @FXML
-    void clicRegresar(ActionEvent event) {
+    // referencia al archivo de aplicacion para comunicacion
+    Application app;
 
+    public void setMain(Application main){
+        this.app = main;
+    }
+
+
+    @FXML
+    void clicRegresar(ActionEvent event) throws IOException {
+        app.principalStage.show();
+        app.cursosStage.hide();
     }
 
     @FXML
