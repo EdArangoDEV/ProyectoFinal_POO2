@@ -20,7 +20,6 @@ public class Application extends javafx.application.Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("principal-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 350, 280);
 
-        stage = new Stage();
         this.principalStage = stage;
         stage.setTitle("Inicio");
         stage.setScene(scene);

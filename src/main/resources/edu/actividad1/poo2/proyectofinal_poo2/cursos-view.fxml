@@ -13,16 +13,11 @@
 <AnchorPane id="Background" fx:id="PaneCursos" prefHeight="520.0" prefWidth="900.0" stylesheets="@EstilosProyectoFinal.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.actividad1.poo2.proyectofinal_poo2.CursosController">
    <children>
       <Label id="titulo" fx:id="lbCursos" alignment="CENTER" contentDisplay="CENTER" layoutX="363.0" layoutY="14.0" prefHeight="30.0" prefWidth="177.0" text="Cursos" />
-      <Button fx:id="btnRegresar" layoutX="796.0" layoutY="465.0" mnemonicParsing="false" onAction="#clicRegresar" prefHeight="35.0" prefWidth="90.0" text="Regresar">
-         <styleClass>
-            <String fx:value="boton_regresar" />
-            <String fx:value="botones_m" />
-         </styleClass>
-      </Button>
       <Label id="sub_titulo" fx:id="lbSelecCursos" alignment="CENTER" contentDisplay="CENTER" layoutX="140.0" layoutY="69.0" prefHeight="30.0" prefWidth="177.0" text="Seleccione Curso" />
+      <ComboBox fx:id="comboBCursos" layoutX="47.0" layoutY="104.0" onAction="#seleccionCurso" prefHeight="25.0" prefWidth="379.0" styleClass="fondo_textos" />
       <Label id="sub_titulo" fx:id="lbFechaAsignacion" alignment="CENTER" contentDisplay="CENTER" layoutX="462.0" layoutY="69.0" prefHeight="30.0" prefWidth="177.0" text="Fecha asignación" />
       <DatePicker fx:id="DatePAsignacion" layoutX="463.0" layoutY="104.0" onAction="#seleccionFecha" styleClass="date-picker" />
-      <ComboBox fx:id="comboBCursos" layoutX="47.0" layoutY="104.0" onAction="#seleccionCurso" prefHeight="25.0" prefWidth="379.0" styleClass="fondo_textos" />
+      <Label id="sub_titulo" fx:id="lbTablaAlumnos" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="152.0" prefHeight="30.0" prefWidth="177.0" text="Alumnos asignados" />
       <TableView layoutX="47.0" layoutY="191.0" prefHeight="300.0" prefWidth="590.0">
         <columns>
           <TableColumn prefWidth="86.0" text="Carne" />
@@ -32,8 +27,13 @@
             <TableColumn prefWidth="78.0" text="Solvencia" />
         </columns>
       </TableView>
-      <PieChart layoutX="663.0" layoutY="191.0" prefHeight="219.0" prefWidth="218.0" styleClass="fondo_textos" />
-      <Label id="sub_titulo" fx:id="lbTablaAlumnos" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="152.0" prefHeight="30.0" prefWidth="177.0" text="Alumnos asignados" />
       <Label id="sub_titulo" fx:id="lbGrafSolvencia" alignment="CENTER" contentDisplay="CENTER" layoutX="684.0" layoutY="152.0" prefHeight="30.0" prefWidth="177.0" text="Grafica solvencia" />
+      <PieChart layoutX="663.0" layoutY="191.0" prefHeight="219.0" prefWidth="218.0" styleClass="fondo_textos" />
+      <Button fx:id="btnRegresar" layoutX="796.0" layoutY="465.0" mnemonicParsing="false" onAction="#clicRegresar" prefHeight="35.0" prefWidth="90.0" text="Regresar">
+         <styleClass>
+            <String fx:value="boton_regresar" />
+            <String fx:value="botones_m" />
+         </styleClass>
+      </Button>
    </children>
 </AnchorPane>
