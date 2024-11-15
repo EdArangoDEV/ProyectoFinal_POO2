@@ -1,5 +1,6 @@
-package edu.actividad1.poo2.proyectofinal_poo2;
+package edu.actividad1.poo2.proyectofinal_poo2.controladores;
 
+import edu.actividad1.poo2.proyectofinal_poo2.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

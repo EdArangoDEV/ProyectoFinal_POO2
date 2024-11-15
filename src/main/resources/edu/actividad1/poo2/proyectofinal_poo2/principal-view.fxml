@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="Background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="350.0" stylesheets="@EstilosProyectoFinal.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.actividad1.poo2.proyectofinal_poo2.ApplicationController">
+<AnchorPane id="Background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="350.0" stylesheets="@EstilosProyectoFinal.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.actividad1.poo2.proyectofinal_poo2.controladores.ApplicationController">
    <children>
       <Label id="titulo" fx:id="lbPrincipal1" alignment="CENTER" contentDisplay="CENTER" layoutX="56.0" layoutY="27.0" prefHeight="30.0" prefWidth="240.0" text="Sistema de Asignaciones de" />
       <Label id="titulo" fx:id="lbPrincipal2" alignment="CENTER" contentDisplay="CENTER" layoutX="56.0" layoutY="57.0" prefHeight="30.0" prefWidth="240.0" text="Edwar Arango - 24000841" />

@@ -8,26 +8,26 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="Background" prefHeight="550.0" prefWidth="925.0" stylesheets="@EstilosProyectoFinal.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.actividad1.poo2.proyectofinal_poo2.AsignacionController">
+<AnchorPane id="Background" prefHeight="550.0" prefWidth="925.0" stylesheets="@EstilosProyectoFinal.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.actividad1.poo2.proyectofinal_poo2.controladores.AsignacionController">
    <children>
       <Label id="titulo" fx:id="lbAsignaciones" alignment="CENTER" contentDisplay="CENTER" layoutX="374.0" layoutY="14.0" prefHeight="30.0" prefWidth="177.0" text="Asignación" />
       <Label id="sub_titulo" fx:id="lbAsignaciones1" alignment="CENTER" contentDisplay="CENTER" layoutX="82.0" layoutY="54.0" prefHeight="30.0" prefWidth="177.0" text="Datos Alumno" />
       <Label fx:id="lbNombre" layoutX="40.0" layoutY="75.0" prefHeight="17.0" prefWidth="66.0" styleClass="textos" text="Nombre" />
       <TextField fx:id="txtFieldNombre" layoutX="40.0" layoutY="94.0" prefHeight="25.0" prefWidth="260.0" styleClass="fondo_textos" />
       <Label fx:id="lbCarnet" layoutX="40.0" layoutY="127.0" prefHeight="17.0" prefWidth="66.0" styleClass="textos" text="Carnet" />
-      <TextField fx:id="txtFieldCarnte" layoutX="40.0" layoutY="146.0" prefHeight="25.0" prefWidth="260.0" styleClass="fondo_textos" />
+      <TextField fx:id="txtFieldCarnet" layoutX="40.0" layoutY="146.0" prefHeight="25.0" prefWidth="260.0" styleClass="fondo_textos" />
       <Label fx:id="lbTel" layoutX="40.0" layoutY="178.0" prefHeight="17.0" prefWidth="66.0" styleClass="textos" text="Teléfono" />
       <TextField fx:id="txtFieldTel" layoutX="40.0" layoutY="197.0" prefHeight="25.0" prefWidth="260.0" styleClass="fondo_textos" />
       <Label fx:id="lbDireccion" layoutX="40.0" layoutY="228.0" prefHeight="17.0" prefWidth="66.0" styleClass="textos" text="Direccion" />
       <TextField fx:id="txtFieldDireccion" layoutX="40.0" layoutY="247.0" prefHeight="25.0" prefWidth="260.0" styleClass="fondo_textos" />
       <Label fx:id="lbCorreo" layoutX="40.0" layoutY="278.0" prefHeight="19.0" prefWidth="109.0" styleClass="textos" text="Correo electrónico" />
-      <TextField fx:id="txtCorreo" layoutX="40.0" layoutY="297.0" prefHeight="25.0" prefWidth="260.0" styleClass="fondo_textos" />
+      <TextField fx:id="txtFieldCorreo" layoutX="40.0" layoutY="297.0" prefHeight="25.0" prefWidth="260.0" styleClass="fondo_textos" />
       <Label id="sub_titulo" fx:id="lbCursosD" alignment="CENTER" contentDisplay="CENTER" layoutX="370.0" layoutY="54.0" prefHeight="30.0" prefWidth="177.0" text="Cursos Disponibles" />
       <ListView fx:id="listCursos" layoutX="328.0" layoutY="96.0" prefHeight="228.0" prefWidth="260.0" styleClass="fondo_textos" />
       <Label id="sub_titulo" fx:id="lbCursosA" alignment="CENTER" contentDisplay="CENTER" layoutX="670.0" layoutY="54.0" prefHeight="30.0" prefWidth="177.0" text="Cursos Asignados" />
       <ListView fx:id="listAsignados" layoutX="628.0" layoutY="96.0" prefHeight="228.0" prefWidth="260.0" styleClass="fondo_textos" />
       <Label id="sub_titulo" fx:id="lbPagoCursos" alignment="CENTER" contentDisplay="CENTER" layoutX="212.0" layoutY="366.0" prefHeight="30.0" prefWidth="177.0" text="Pago de cursos" />
-      <CheckBox fx:id="checkBPagar" layoutX="410.0" layoutY="373.0" mnemonicParsing="false" onAction="#checkPagar" styleClass="textos" text="Pagar Ahora" />
+      <CheckBox fx:id="checkBPagar" layoutX="410.0" layoutY="373.0" mnemonicParsing="false" styleClass="textos" text="Pagar Ahora" />
       <Label fx:id="lbNTarjeta" disable="true" layoutX="170.0" layoutY="422.0" prefHeight="17.0" prefWidth="90.0" styleClass="textos" text="Número Tarjeta" />
       <TextField fx:id="txtFielNTarjeta" disable="true" layoutX="170.0" layoutY="441.0" prefHeight="25.0" prefWidth="260.0" promptText="1234 1234 1234 1234 " styleClass="fondo_textos" />
       <Label fx:id="lbTitular" disable="true" layoutX="170.0" layoutY="472.0" prefHeight="17.0" prefWidth="90.0" styleClass="textos" text="Nombre Titular" />

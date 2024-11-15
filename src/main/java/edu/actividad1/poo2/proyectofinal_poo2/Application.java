@@ -1,5 +1,8 @@
 package edu.actividad1.poo2.proyectofinal_poo2;
 
+import edu.actividad1.poo2.proyectofinal_poo2.controladores.ApplicationController;
+import edu.actividad1.poo2.proyectofinal_poo2.controladores.AsignacionController;
+import edu.actividad1.poo2.proyectofinal_poo2.controladores.CursosController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -10,9 +13,9 @@ import java.io.IOException;
 
 public class Application extends javafx.application.Application {
 
-    Stage principalStage;
-    Stage cursosStage;
-    Stage asignacionesStage;
+    public Stage principalStage;
+    public Stage cursosStage;
+    public Stage asignacionesStage;
 
     @Override
     public void start(Stage stage) throws IOException {
