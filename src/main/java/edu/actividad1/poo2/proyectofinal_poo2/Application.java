@@ -3,6 +3,8 @@ package edu.actividad1.poo2.proyectofinal_poo2;
 import edu.actividad1.poo2.proyectofinal_poo2.controladores.ApplicationController;
 import edu.actividad1.poo2.proyectofinal_poo2.controladores.AsignacionController;
 import edu.actividad1.poo2.proyectofinal_poo2.controladores.CursosController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -16,6 +18,14 @@ public class Application extends javafx.application.Application {
     public Stage principalStage;
     public Stage cursosStage;
     public Stage asignacionesStage;
+//    public ObservableList listaAsignados = FXCollections.observableArrayList();
+//    public ObservableList listaCursos = FXCollections.observableArrayList("Matematica I",
+//            "Algoritmos I",
+//            "Logica de programacion I",
+//            "Ingles I",
+//            "UML",
+//            "Base de Datos I",
+//            "POO I");
 
     @Override
     public void start(Stage stage) throws IOException {

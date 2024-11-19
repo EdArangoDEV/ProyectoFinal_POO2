@@ -1,12 +1,12 @@
 package edu.actividad1.poo2.proyectofinal_poo2.controladores;
 
 import edu.actividad1.poo2.proyectofinal_poo2.Application;
+import edu.actividad1.poo2.proyectofinal_poo2.modelos.Cursos;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -26,6 +26,9 @@ public class CursosController {
     private ComboBox<?> comboBCursos;
 
     @FXML
+    private Button btnLimpiar;
+
+    @FXML
     private Label lbCursos;
 
     @FXML
@@ -40,12 +43,17 @@ public class CursosController {
     @FXML
     private Label lbTablaAlumnos;
 
+    @FXML
+    private TableView<?> tablaAlumnos;
+
     // referencia al archivo de aplicacion para comunicacion
     Application app;
 
     public void setMain(Application main){
         this.app = main;
     }
+
+    public ObservableList listaCursos = Cursos.listaCursos;
 
 
     @FXML
@@ -63,5 +71,20 @@ public class CursosController {
     void seleccionFecha(ActionEvent event) {
 
     }
+
+    @FXML
+    void clicLimpiar(ActionEvent actionEvent) {
+        limpiarCampos();
+    }
+
+    private void limpiarCampos(){
+        comboBCursos.getSelectionModel().clearSelection();
+        DatePAsignacion.setValue(null);
+    }
+
+    public void initialize(){
+        comboBCursos.setItems(listaCursos);
+    }
+
 
 }

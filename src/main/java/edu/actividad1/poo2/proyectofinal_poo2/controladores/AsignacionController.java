@@ -1,6 +1,10 @@
 package edu.actividad1.poo2.proyectofinal_poo2.controladores;
 
 import edu.actividad1.poo2.proyectofinal_poo2.Application;
+import edu.actividad1.poo2.proyectofinal_poo2.modelos.Cursos;
+import javafx.beans.InvalidationListener;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,7 +15,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+import javax.swing.event.ChangeEvent;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class AsignacionController {
 
@@ -73,11 +79,21 @@ public class AsignacionController {
     @FXML
     private ListView<?> listAsignados;
 
+    public ObservableList listaAsignados = FXCollections.observableArrayList();
+//    public ObservableList listaAsignados = this.app.listaAsignados;
+
     @FXML
     private ListView<?> listCursos;
 
 //    ArrayList<String> listaCursos = new ArrayList<String>();
-    ObservableList listaCursos = FXCollections.observableArrayList();
+//    public ObservableList listaCursos = FXCollections.observableArrayList("Matematica I",
+//        "Algoritmos I",
+//        "Logica de programacion I",
+//        "Ingles I",
+//        "UML",
+//        "Base de Datos I",
+//        "POO I");
+    public ObservableList listaCursos = Cursos.listaCursos;
 
     @FXML
     private TextField txtFieldCorreo;
@@ -106,6 +122,14 @@ public class AsignacionController {
     @FXML
     private TextField txtFieldTitular;
 
+
+    // referencia al archivo de aplicacion para comunicacion
+    Application app;
+
+    public void setMain(Application main){
+        this.app = main;
+    }
+
     @FXML
     void clicAsignar(ActionEvent event) {
         if(datos && !btnAsignar.isDisable())
@@ -122,6 +146,7 @@ public class AsignacionController {
     void clicCancelar(ActionEvent event) {
         limpiarTextFields();
         validarDatosEstudiante();
+        listaAsignados.clear();
     }
 
     @FXML
@@ -130,16 +155,10 @@ public class AsignacionController {
         app.asignacionesStage.hide();
     }
 
-    // referencia al archivo de aplicacion para comunicacion
-    Application app;
-
-    public void setMain(Application main){
-        this.app = main;
-    }
-
     boolean datos = false;
     boolean pagar = false;
     boolean pago = false;
+    String curso;
 
 
     private  void validarDatosEstudiante(){
@@ -149,19 +168,12 @@ public class AsignacionController {
         boolean txtFTel = txtFieldTel.getText().trim().isEmpty();
         boolean txtFDireccion = txtFieldDireccion.getText().trim().isEmpty();
         boolean txtFCorrero = txtFieldCorreo.getText().trim().isEmpty();
+        boolean listaCursosAsig = listaCursos.isEmpty();
 
-
-        if(txtFNombre || txtFCarnet || txtFTel || txtFDireccion || txtFCorrero){
-            pagar = true;
-            datos = false;
-        }
-        else
-        {
-            pagar = false;
-            datos = true;
-        }
-            setCheckBPagar(pagar);
-            setBotonAsignar();
+        pagar = (txtFNombre || txtFCarnet || txtFTel || txtFDireccion || txtFCorrero || listaCursosAsig) ? true : false;
+        datos = !pagar;
+        setCheckBPagar(pagar);
+        setBotonAsignar();
     }
 
     private void setCheckBPagar(boolean valor){
@@ -187,39 +199,37 @@ public class AsignacionController {
         boolean txtFExpiracion = txtFieldExpiracionT.getText().trim().isEmpty();
         boolean txtFCVC = txtFieldCVC.getText().trim().isEmpty();
 
-
-        if(txtFTarjeta || txtFTitular || txtFExpiracion || txtFCVC){
-            pago = false;
-        }
-        else
-        {
-            pago = true;
-        }
+        pago = (txtFTarjeta || txtFTitular || txtFExpiracion || txtFCVC) ? false : true;
         setBotonAsignar();
     }
 
-    public void setBotonAsignar(){
-        if (datos)
-        {
+
+    private void setBotonAsignar(){
+        if (datos && !listaAsignados.isEmpty()) {
+//            setBCancelar(false);
             if(!checkBPagar.isSelected()) {
                 btnAsignar.setDisable(false);
             }
-            else if (checkBPagar.isSelected() && pago){
+            else if (checkBPagar.isSelected() && pago) {
                 btnAsignar.setDisable(false);
             }
             else {
                 btnAsignar.setDisable(true);
             }
         }
-        else{
+        else {
             btnAsignar.setDisable(true);
             checkBPagar.setSelected(false);
+            setCheckBPagar(true);
+//            setBCancelar(true);
         }
-
-
     }
 
-    public  void limpiarTextFields(){
+    private void setBCancelar(boolean valor){
+        btnCancelar.setDisable(valor);
+    }
+
+    private void limpiarTextFields() {
         txtFieldNombre.setText("");
         txtFieldCarnet.setText("");
         txtFieldDireccion.setText("");
@@ -233,9 +243,9 @@ public class AsignacionController {
 
     public void initialize(){
         // Deshabilitar boton Asingar
-        btnAsignar.setDisable(true);
+        setBotonAsignar();
         setCheckBPagar(true);
-
+//        setBCancelar(true);
 
         // Añadir listener al CheckBox
         checkBPagar.selectedProperty().addListener((observable, antValue, nueValue) -> {
@@ -245,10 +255,6 @@ public class AsignacionController {
             //System.out.println("Valor anterior: " + antValue);
             //System.out.println("Nuevo valor: " + nueValue);
         });
-
-//        btnAsignar.sceneProperty().addListener((observable, antValue, nueValue) -> {
-//            setBotonAsignar();
-//        });
 
 
         txtFieldNombre.focusedProperty().addListener((observable, antValue, nueValue) -> {
@@ -283,23 +289,88 @@ public class AsignacionController {
         txtFieldCVC.focusedProperty().addListener((observable, antValue, nueValue) ->
                 validarDatosPago());
 
-        listCursos.setPlaceholder(new Label("No hay informacion para mostrar"));
-        listAsignados.setPlaceholder(new Label("No hay informacion para mostrar"));
+        Label placehCursos = new Label("No hay Cursos para mostrar");
+        placehCursos.setId(".placeholder-label");
+        Label placehAsignaciones = new Label("No hay Cursos asignados");
+        placehAsignaciones.setId(".placeholder-label");
 
-        //        listaCursos.add("");
-        // Agregar nombres de cursos a la lista
-        listaCursos.add("Matematica I");
-        listaCursos.add("Algoritmos I");
-        listaCursos.add("Logica de programacion I");
-        listaCursos.add("Ingles I");
-        listaCursos.add("UML");
-        listaCursos.add("Base de Datos I");
-        listaCursos.add("POO I");
-
+        listCursos.setPlaceholder(placehCursos);
+        listAsignados.setPlaceholder(placehAsignaciones);
 
         listCursos.setItems(listaCursos);
 
-        setBotonAsignar();
+
+
+//        listCursos.getSelectionModel().selectedItemProperty().addListener(new ChangeListener(){
+//            @Override
+//            public void changed(ObservableValue ov, Object oa, Object on) {
+//                curso = (String) listCursos.getSelectionModel().getSelectedItem();
+//                System.out.println("Curso seleccionado" + curso);
+//                listaAsignados.add(curso);
+//                listAsignados.setItems(listaAsignados);
+//                curso = "";
+//            }
+//        });
+
+//        listAsignados.getSelectionModel().selectedItemProperty().addListener(new ChangeListener(){
+//            @Override
+//            public void changed(ObservableValue ov, Object oa, Object on) {
+//                curso = (String) listAsignados.getSelectionModel().getSelectedItem();
+//                System.out.println("Curso seleccionado" + curso);
+//                if(listaAsignados.size() == 1)
+//                {
+//                    listaAsignados.clear();
+//                }
+//                else {
+//                    listaAsignados.remove(curso);
+//                }
+//                listAsignados.setItems(listaAsignados);
+//
+//                curso = "";
+//            }
+//        });
+
+        listCursos.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.SINGLE);
+
+        listCursos.setOnMouseClicked(event -> {
+            curso = (String) listCursos.getSelectionModel().getSelectedItem();
+            if(curso != null) {
+                if (!listaAsignados.contains(curso)) {
+                    System.out.println("Curso seleccionado: " + curso);
+                    listaAsignados.add(curso);
+                    listAsignados.setItems(listaAsignados);
+                } else {
+                    System.out.println("El curso ya está asignado: " + curso);
+                }
+                curso = "";
+                listCursos.getSelectionModel().clearSelection();
+                validarDatosEstudiante();
+            }
+        });
+
+        listAsignados.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.SINGLE);
+
+        listAsignados.setOnMouseClicked(event -> {
+            curso = (String) listAsignados.getSelectionModel().getSelectedItem();
+            if (curso != null){
+                System.out.println("Curso seleccionado " + curso);
+                if(listaAsignados.size() == 1)
+                {
+                    listaAsignados.clear();
+                }
+                else {
+                    listaAsignados.remove(curso);
+                }
+                listAsignados.setItems(listaAsignados);
+
+                curso = "";
+                listAsignados.getSelectionModel().clearSelection();
+                validarDatosEstudiante();
+            }
+        });
+
+
+
     }
 
 }

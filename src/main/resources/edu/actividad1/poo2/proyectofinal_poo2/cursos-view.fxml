@@ -17,8 +17,9 @@
       <ComboBox fx:id="comboBCursos" layoutX="47.0" layoutY="104.0" onAction="#seleccionCurso" prefHeight="25.0" prefWidth="379.0" styleClass="fondo_textos" />
       <Label id="sub_titulo" fx:id="lbFechaAsignacion" alignment="CENTER" contentDisplay="CENTER" layoutX="462.0" layoutY="69.0" prefHeight="30.0" prefWidth="177.0" text="Fecha asignación" />
       <DatePicker fx:id="DatePAsignacion" layoutX="463.0" layoutY="104.0" onAction="#seleccionFecha" styleClass="date-picker" />
+      <Button fx:id="btnLimpiar" layoutX="727.0" layoutY="99.0" mnemonicParsing="false" onAction="#clicLimpiar" prefHeight="35.0" prefWidth="90.0" styleClass="botones" text="Limpiar" />
       <Label id="sub_titulo" fx:id="lbTablaAlumnos" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="152.0" prefHeight="30.0" prefWidth="177.0" text="Alumnos asignados" />
-      <TableView layoutX="47.0" layoutY="191.0" prefHeight="300.0" prefWidth="590.0">
+      <TableView fx:id="tablaAlumnos" layoutX="47.0" layoutY="191.0" prefHeight="300.0" prefWidth="590.0">
         <columns>
           <TableColumn prefWidth="86.0" text="Carne" />
           <TableColumn prefWidth="187.0" text="Nombre" />

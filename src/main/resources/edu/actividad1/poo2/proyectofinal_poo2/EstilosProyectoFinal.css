@@ -101,7 +101,7 @@
 /* Cambiar el color de fondo de las celdas en el calendario */
 .date-picker .cell {
     -fx-background-color: #528bff;
-    -fx-background-color: #ffffff; /* Color de fondo de las celdas */
+    -fx-text-fill: #ffffff; /* Color de fondo de las celdas */
 }
 
 /* Efecto hover para las celdas */
@@ -114,6 +114,10 @@
     -fx-background-color: #528bff; /* Color de fondo de la celda seleccionada */
 }
 
+.placeholder-label {
+     -fx-background-color: #528bff;
+    -fx-text-fill: #ffffff; /* Color de fondo de las celdas */
+}
 
 
 /* Cambiar el color de fondo del encabezado de la tabla */
