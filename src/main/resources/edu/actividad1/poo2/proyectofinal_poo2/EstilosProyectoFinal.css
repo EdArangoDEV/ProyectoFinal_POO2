@@ -58,6 +58,27 @@
 }
 
 
+.list-view {
+    -fx-background-color: #3c3c3c; /* Cambia 'lightblue' por el color que desees */
+}
+
+.list-cell {
+    -fx-background-color: #3c3c3c; /* Color de fondo para filas impares */
+    -fx-text-fill: #ffffff; /* Color del texto */
+}
+
+
+.list-cell:selected {
+    -fx-background-color: #528bff; /* Color de fondo cuando la fila está seleccionada */
+    -fx-text-fill:  #ffffff; /* Color del texto cuando la fila está seleccionada */
+}
+
+.list-view-label {
+    -fx-text-fill:  #ffffff;  /* Cambia 'red' por el color que desees */
+    -fx-font-size: 12.5px; /* Cambia el tamaño de la fuente si es necesario */
+}
+
+
 /* Cambiar el color de fondo del campo de texto del DatePicker */
 .date-picker .text-field {
     -fx-background-color: #3c3c3c; /* Color de fondo del campo de texto */
