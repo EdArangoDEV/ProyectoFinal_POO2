@@ -8,4 +8,5 @@ module edu.actividad1.poo2.proyectofinal_poo2 {
     exports edu.actividad1.poo2.proyectofinal_poo2;
     exports edu.actividad1.poo2.proyectofinal_poo2.controladores;
     opens edu.actividad1.poo2.proyectofinal_poo2.controladores to javafx.fxml;
+    opens edu.actividad1.poo2.proyectofinal_poo2.modelos;
 }

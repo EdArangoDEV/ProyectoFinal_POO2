@@ -3,6 +3,7 @@ package edu.actividad1.poo2.proyectofinal_poo2;
 import edu.actividad1.poo2.proyectofinal_poo2.controladores.ApplicationController;
 import edu.actividad1.poo2.proyectofinal_poo2.controladores.AsignacionController;
 import edu.actividad1.poo2.proyectofinal_poo2.controladores.CursosController;
+import edu.actividad1.poo2.proyectofinal_poo2.modelos.PruebaAsignacion;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +11,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 public class Application extends javafx.application.Application {
@@ -18,6 +20,7 @@ public class Application extends javafx.application.Application {
     public Stage principalStage;
     public Stage cursosStage;
     public Stage asignacionesStage;
+
 //    public ObservableList listaAsignados = FXCollections.observableArrayList();
 //    public ObservableList listaCursos = FXCollections.observableArrayList("Matematica I",
 //            "Algoritmos I",
@@ -39,6 +42,8 @@ public class Application extends javafx.application.Application {
 
         ApplicationController appC = fxmlLoader.getController();
         appC.setMain(this);
+
+//        asignacionEstudianteP("si");
 
         stage.show();
     }
@@ -76,6 +81,32 @@ public class Application extends javafx.application.Application {
 
         asignacionesStage.setOnCloseRequest(e -> principalStage.show());
     }
+
+    public static String fechaActual(){
+        LocalDate fechaActual = LocalDate.now();
+
+        // Definir el formato deseado
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        // Formatear la fecha
+        String fechaFormateada = fechaActual.format(formato);
+        return  fechaFormateada;
+    }
+
+    public static ObservableList<PruebaAsignacion> listaAsignaciones = FXCollections.observableArrayList();
+
+//    public static void asignacionEstudianteP(String solvencia){
+//        PruebaAsignacion pAsignacion = new PruebaAsignacion();
+//        pAsignacion.setCarnet("240001");
+//        pAsignacion.setNombre("Prueba 1");
+//        pAsignacion.setCorreo("prueba@gamil.com");
+//        pAsignacion.setFechaAsignacion(fechaActual());
+//        pAsignacion.setSolvencia("si");
+//        pAsignacion.setCurso("Algoritmos I");
+//        listaAsignaciones.add(pAsignacion);
+//    }
+
+
 
 
     public static void main(String[] args) {

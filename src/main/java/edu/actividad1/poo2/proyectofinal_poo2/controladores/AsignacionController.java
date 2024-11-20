@@ -1,8 +1,11 @@
 package edu.actividad1.poo2.proyectofinal_poo2.controladores;
 
 import edu.actividad1.poo2.proyectofinal_poo2.Application;
+import edu.actividad1.poo2.proyectofinal_poo2.modelos.Asignacion;
 import edu.actividad1.poo2.proyectofinal_poo2.modelos.Cursos;
+import edu.actividad1.poo2.proyectofinal_poo2.modelos.PruebaAsignacion;
 import javafx.beans.InvalidationListener;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,7 +19,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 import javax.swing.event.ChangeEvent;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 public class AsignacionController {
@@ -75,13 +81,6 @@ public class AsignacionController {
     @FXML
     private Label lbTitular;
 
-
-    @FXML
-    private ListView<?> listAsignados;
-
-    public ObservableList listaAsignados = FXCollections.observableArrayList();
-//    public ObservableList listaAsignados = this.app.listaAsignados;
-
     @FXML
     private ListView<?> listCursos;
 
@@ -93,7 +92,13 @@ public class AsignacionController {
 //        "UML",
 //        "Base de Datos I",
 //        "POO I");
-    public ObservableList listaCursos = Cursos.listaCursos;
+    public ObservableList listaCursos = Cursos.listaCursos.listaCursos;
+
+    @FXML
+    private ListView<String> listAsignados;
+
+    public ObservableList<String> listaAsignados = FXCollections.observableArrayList();
+//    public ObservableList listaAsignados = this.app.listaAsignados;
 
     @FXML
     private TextField txtFieldCorreo;
@@ -134,19 +139,47 @@ public class AsignacionController {
     void clicAsignar(ActionEvent event) {
         if(datos && !btnAsignar.isDisable())
         {
-            System.out.println("Se asigno correctamente");
-            limpiarTextFields();
+            String txtpago = "No realizo pago";
+            String fechaAsignacion = app.fechaActual();
+            String solvecnia = "no";
+            if(pago)
+            {
+                txtpago = "Realizo el pago";
+                System.out.println("Se asgino el estudiante: " + txtFieldNombre.getText() + " el dia " + fechaAsignacion + " y " + txtpago);
+                solvecnia = "si";
+            }
+            else {
+                System.out.println("Se asgino el estudiante: " + txtFieldNombre.getText() + " el dia " + fechaAsignacion + " y " + txtpago);
+            }
+            asignacionEstudiante(solvecnia);
+            limpiarDatos();
         }
         else{
             System.out.println("Debe llenar todos los campos");
         }
     }
 
+    public void asignacionEstudiante(String solvencia){
+
+        for (String curso : listaAsignados)
+        {
+            PruebaAsignacion pAsignacion = new PruebaAsignacion();
+            pAsignacion.setCarnet(txtFieldCarnet.getText());
+            pAsignacion.setNombre(txtFieldNombre.getText());
+            pAsignacion.setCorreo(txtFieldCorreo.getText());
+            pAsignacion.setFechaAsignacion(app.fechaActual());
+            pAsignacion.setSolvencia(solvencia);
+            pAsignacion.setCurso(curso);
+            app.listaAsignaciones.add(pAsignacion);
+        }
+        System.out.println(app.listaAsignaciones.toArray());
+    }
+
+
     @FXML
     void clicCancelar(ActionEvent event) {
-        limpiarTextFields();
+        limpiarDatos();
         validarDatosEstudiante();
-        listaAsignados.clear();
     }
 
     @FXML
@@ -229,7 +262,7 @@ public class AsignacionController {
         btnCancelar.setDisable(valor);
     }
 
-    private void limpiarTextFields() {
+    private void limpiarDatos() {
         txtFieldNombre.setText("");
         txtFieldCarnet.setText("");
         txtFieldDireccion.setText("");
@@ -239,9 +272,13 @@ public class AsignacionController {
         txtFieldTitular.setText("");
         txtFieldExpiracionT.setText("");
         txtFieldCVC.setText("");
+        listaAsignados.clear();
     }
 
+
+
     public void initialize(){
+
         // Deshabilitar boton Asingar
         setBotonAsignar();
         setCheckBPagar(true);
@@ -298,7 +335,6 @@ public class AsignacionController {
         listAsignados.setPlaceholder(placehAsignaciones);
 
         listCursos.setItems(listaCursos);
-
 
 
 //        listCursos.getSelectionModel().selectedItemProperty().addListener(new ChangeListener(){
@@ -368,8 +404,6 @@ public class AsignacionController {
                 validarDatosEstudiante();
             }
         });
-
-
 
     }
 

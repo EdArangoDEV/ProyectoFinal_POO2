@@ -67,6 +67,10 @@
     -fx-text-fill: #ffffff; /* Color del texto */
 }
 
+.list-view .placeholder .label{
+     -fx-text-fill: #ffffff; /* Color del texto */
+}
+
 
 .list-cell:selected {
     -fx-background-color: #528bff; /* Color de fondo cuando la fila está seleccionada */
@@ -122,7 +126,7 @@
 
 /* Cambiar el color de fondo del encabezado de la tabla */
 .table-view .column-header {
-    -fx-background-color: #3c3c3c; /* Color de fondo del encabezado */
+    -fx-background-color: #528bff; /* Color de fondo del encabezado */
     -fx-text-fill: #ffffff; /* Color del texto en el encabezado */
     -fx-border-width: 0 1px 0 0; /* Solo el borde derecho */
 }
@@ -137,9 +141,31 @@
 
 
 /* Cambiar el color de fondo del cuerpo de la tabla */
-.table-view .table-row-cell {
+ .table-row-cell .table-cell{
     -fx-background-color: #3c3c3c; /* Color de fondo por defecto para las filas */
     -fx-text-fill: #ffffff; /* Color del texto por defecto */
+}
+
+
+/* Cambiar el color del texto al pasar el ratón sobre la fila */
+.table-row-cell:hover .table-cell {
+     -fx-opacity: 0.90; /* Color del texto al pasar el ratón */
+}
+
+/* styles.css */
+.table-row-cell:selected .table-cell{
+    -fx-background-color: transparent; /* Fondo transparente para filas seleccionadas */
+    -fx-text-fill: #ffffff; /* Color del texto */
+}
+
+
+.table-view .placeholder {
+    -fx-background-color: #3c3c3c;
+}
+
+.table-view .placeholder .label{
+    -fx-text-fill: #ffffff; /* Cambia el color del texto del placeholder */
+    -fx-font-size: 13px; /* Cambia el tamaño de la fuente si lo deseas */
 }
 
 
@@ -148,6 +174,8 @@
     -fx-background-color: #3c3c3c; /* Color de fondo para el encabezado */
     -fx-text-fill: #ffffff;
 }
+
+
 
 /* Cambiar el color de fondo del área del encabezado del calendario */
 .date-picker-popup .month-year-pane .label{
@@ -171,5 +199,10 @@
 /* Efecto hover para las celdas en la lista desplegable */
 .combo-box .list-cell:hover {
    -fx-opacity: 0.90; /* Color al pasar el mouse sobre la celda */
+}
+
+
+.combo-box .placeholder .label {
+   -fx-text-fill: #ffffff;
 }
 
