@@ -140,7 +140,7 @@ public class AsignacionController {
         if(datos && !btnAsignar.isDisable())
         {
             String txtpago = "No realizo pago";
-            String fechaAsignacion = app.fechaActual();
+            String fechaAsignacion = app.formatearFecha(LocalDate.now());
             String solvecnia = "no";
             if(pago)
             {
@@ -167,7 +167,7 @@ public class AsignacionController {
             pAsignacion.setCarnet(txtFieldCarnet.getText());
             pAsignacion.setNombre(txtFieldNombre.getText());
             pAsignacion.setCorreo(txtFieldCorreo.getText());
-            pAsignacion.setFechaAsignacion(app.fechaActual());
+            pAsignacion.setFechaAsignacion(app.formatearFecha(LocalDate.now()));
             pAsignacion.setSolvencia(solvencia);
             pAsignacion.setCurso(curso);
             app.listaAsignaciones.add(pAsignacion);

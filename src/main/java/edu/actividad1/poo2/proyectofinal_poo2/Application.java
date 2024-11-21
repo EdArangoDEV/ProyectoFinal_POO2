@@ -82,14 +82,12 @@ public class Application extends javafx.application.Application {
         asignacionesStage.setOnCloseRequest(e -> principalStage.show());
     }
 
-    public static String fechaActual(){
-        LocalDate fechaActual = LocalDate.now();
-
+    public static String formatearFecha(LocalDate fecha){
         // Definir el formato deseado
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         // Formatear la fecha
-        String fechaFormateada = fechaActual.format(formato);
+        String fechaFormateada = fecha.format(formato);
         return  fechaFormateada;
     }
 

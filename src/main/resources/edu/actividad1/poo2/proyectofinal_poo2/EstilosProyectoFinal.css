@@ -202,7 +202,7 @@
 }
 
 
-.combo-box .placeholder .label {
+.combo-box .text-field  {
    -fx-text-fill: #ffffff;
 }
 

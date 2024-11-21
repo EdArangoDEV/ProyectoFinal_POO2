@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class CursosController {
@@ -69,6 +70,9 @@ public class CursosController {
     @FXML
     private Button btnRegresar;
 
+    String cursoSeleccionado = "";
+    String fechaFormateada = "";
+
 
     // referencia al archivo de aplicacion para comunicacion
     Application app;
@@ -102,34 +106,151 @@ public class CursosController {
         limpiarCampos();
     }
 
-    private void llenarTablaAsignados(String curso){
-        if (!listaAsignaciones.isEmpty()) {
-            ObservableList listaFiltrados = FXCollections.observableArrayList();
+    private ObservableList<PruebaAsignacion> filtrarCursos(){
+        cursoSeleccionado = (String) comboBCursos.getValue();
+        ObservableList listaFiltradosCursos = FXCollections.observableArrayList();
 
+        if(cursoSeleccionado != null && !cursoSeleccionado.isEmpty()){
             for (PruebaAsignacion asignados : listaAsignaciones) {
                 String cursoA = asignados.getCurso();
-                if (cursoA.equals(curso) && cursoA != null)
-                    listaFiltrados.add(asignados);
-
-                if (!listaFiltrados.isEmpty())
-                    tablaAsignaciones.setItems(listaFiltrados);
-                else
-                    tablaAsignaciones.setItems(null);
-                    tablaAsignaciones.setPlaceholder(new Label("No hay Estudiantes asignados al curso: " + curso));
+                if (cursoA.equals(cursoSeleccionado)){
+                    listaFiltradosCursos.add(asignados);
+                }
             }
         }
-        else {
-            tablaAsignaciones.setPlaceholder(new Label("No hay Estudiantes asignados al curso: " + curso));
+
+        return listaFiltradosCursos;
+    }
+
+    private ObservableList<PruebaAsignacion> filtrarFechas(){
+        ObservableList listaFiltradosFecha = FXCollections.observableArrayList();
+
+        if (datePAsignacion.getValue() != null){
+            fechaFormateada = app.formatearFecha(datePAsignacion.getValue());
+
+            if(fechaFormateada != null && !fechaFormateada.isEmpty()){
+                for (PruebaAsignacion asignados : listaAsignaciones) {
+                    String fechaA = asignados.getFechaAsignacion();
+                    if (fechaA.equals(fechaFormateada)) {
+                        listaFiltradosFecha.add(asignados);
+                    }
+                }
+            }
+        }
+
+        return listaFiltradosFecha;
+    }
+
+//    private void llenarTablaAsignados(String curso, String fecha){
+//        System.out.println(curso);
+//        System.out.println(fecha);
+//        ObservableList listaFiltrados = FXCollections.observableArrayList();
+//        if (!listaAsignaciones.isEmpty()){
+//            ObservableList<PruebaAsignacion> listaFiltradosCurso = FXCollections.observableArrayList();
+//            ObservableList<PruebaAsignacion> listaFiltradosFecha = FXCollections.observableArrayList();
+//            ObservableList<PruebaAsignacion> listaFCursoFecha = FXCollections.observableArrayList();
+//
+//            if(curso != null && fecha != null || !curso.isEmpty() &&  !fecha.isEmpty()) {
+//                System.out.println("estan los dos valores");
+//                listaFiltradosCurso = filtrarCursos(curso);
+//                System.out.println(listaFiltradosCurso.toArray().toString());
+//                if(!listaFiltradosCurso.isEmpty()){
+//                    for (PruebaAsignacion asignado : listaFiltradosCurso) {
+//                        String fechaA = asignado.getFechaAsignacion();
+//                        if (fechaA.equals(fecha))
+//                            listaFCursoFecha.add(asignado);
+//                    }
+//
+//                    if (!listaFCursoFecha.isEmpty()){
+//                        tablaAsignaciones.setItems(listaFCursoFecha);
+//                    }
+//                    else {
+//                        tablaAsignaciones.setItems(null);
+//                        tablaAsignaciones.setPlaceholder(new Label("No hay Estudiantes asignados al curso: " + curso + " y fecha: " + fecha));
+//
+//                    }
+//                }
+//                else {
+//                    tablaAsignaciones.setPlaceholder(new Label("No hay Estudiantes asignados al curso: " + curso + " y fecha: " + fecha));
+//                }
+//            } else if (!curso.isEmpty() && fecha.isEmpty()){
+//                listaFiltradosCurso = filtrarCursos(curso);
+//                if (!listaFiltradosCurso.isEmpty()){
+//                    tablaAsignaciones.setItems(listaFiltradosCurso);
+//                }
+//                else {
+//                    tablaAsignaciones.setItems(null);
+//                    tablaAsignaciones.setPlaceholder(new Label("No hay Estudiantes asignados al curso: " + curso));
+//                }
+//
+//            } else if (curso.isEmpty() && !fecha.isEmpty()){
+//                listaFiltradosFecha = filtrarFechas(fecha);
+//                if (!listaFiltradosFecha.isEmpty()){
+//                    tablaAsignaciones.setItems(listaFiltradosFecha);
+//                } else {
+//                    tablaAsignaciones.setItems(null);
+//                    tablaAsignaciones.setPlaceholder(new Label("No hay Estudiantes asignados en la fecha: " + fecha));
+//                }
+//            }
+//        }
+//        else {
+//            tablaAsignaciones.setPlaceholder(new Label("No hay Estudiantes asignados a los cursos"));
+//        }
+//    }
+
+
+    private void actualizarTabla(){
+        ObservableList<PruebaAsignacion> listaFiltradosCurso = filtrarCursos();
+        ObservableList<PruebaAsignacion> listaFiltradosFecha = filtrarFechas();
+
+        if (datePAsignacion.getValue() != null) {
+            fechaFormateada = app.formatearFecha(datePAsignacion.getValue());
+        }
+        if (comboBCursos.getValue() != null){
+            cursoSeleccionado = (String) comboBCursos.getValue();
+        }
+
+        ObservableList<PruebaAsignacion> listaAsignadosFiltrados = FXCollections.observableArrayList();
+
+
+        if (listaFiltradosCurso.isEmpty() && listaFiltradosFecha.isEmpty()){
+            // Si ambos están vacíos, no hay nada que mostrar
+            tablaAsignaciones.setItems(FXCollections.observableArrayList());
+//            tablaAsignaciones.setPlaceholder(new Label("No hay Estudiantes asignados al curso: " + cursoSeleccionado + " y fecha: " + fechaFormateada));
+        } else if (listaFiltradosCurso.isEmpty()) {
+            // Solo mostrar los filtrados por fecha
+            tablaAsignaciones.setItems(listaFiltradosFecha);
+
+        } else if (listaFiltradosFecha.isEmpty()) {
+            // Solo mostrar los filtrados por curso
+            tablaAsignaciones.setItems(listaFiltradosCurso);
+
+        } else {
+            // Intersección de ambos resultados
+            for (PruebaAsignacion asignado : listaFiltradosCurso) {
+                if (listaFiltradosFecha.contains(asignado)) {
+                    listaAsignadosFiltrados.add(asignado);
+                    tablaAsignaciones.setItems(listaAsignadosFiltrados);
+                }
+            }
         }
     }
 
     private void limpiarCampos(){
-        comboBCursos.getSelectionModel().clearSelection();
-        comboBCursos.setPlaceholder(new Label("Seleccione curso"));
+        cursoSeleccionado = "";
+        fechaFormateada = "";
+//        comboBCursos.getSelectionModel().clearSelection();
+//        comboBCursos.getItems().add("");
+        comboBCursos.setValue(null);
+        comboBCursos.setPromptText("Seleccione un curso...");
+//        comboBCursos.setPlaceholder(new Label("Seleccione curso"));
         datePAsignacion.setValue(null);
-        listaAsignaciones.clear();
-        tablaAsignaciones.setItems(listaAsignaciones);
+//        listaAsignaciones.clear();
+        tablaAsignaciones.setItems(null);
         tablaAsignaciones.setPlaceholder(new Label("No ha seleccionado ningun curso."));
+
+        System.out.println(cursoSeleccionado);
+        System.out.println(fechaFormateada);
     }
 
     public void initialize(){
@@ -143,39 +264,29 @@ public class CursosController {
         tablaAsignaciones.setItems(listaAsignaciones);
         tablaAsignaciones.setPlaceholder(new Label("No ha seleccionado ningun curso."));
 
-//        tablaAsignaciones.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.);
-
-//        comboBCursos.setOnMouseClicked(event -> {
-////            curso = (String) listCursos.getSelectionModel().getSelectedItem();
-//            String cursoSeleccionado = (String) comboBCursos.getValue();
-//            if (cursoSeleccionado != null) {
-//                llenarTablaAsignados(cursoSeleccionado);
-//            }
-//        });
-
+        cursoSeleccionado = "";
+        fechaFormateada = "";
 
          //Añadir listener al ComboBox
         comboBCursos.setOnAction(event -> {
-            String cursoSeleccionado = (String) comboBCursos.getValue();
-            if (cursoSeleccionado != null) {
-                llenarTablaAsignados(cursoSeleccionado);
-            }
+            actualizarTabla();
+//            cursoSeleccionado = (String) comboBCursos.getValue();
+//            if (cursoSeleccionado != null) {
+//
+////                llenarTablaAsignados(cursoSeleccionado, fechaFormateada);
+//            }
         });
 
         datePAsignacion.setOnAction(actionEvent -> {
-            if(datePAsignacion.getValue() != null){
-                // Definir el formato deseado
-                DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                // Formatear la fecha
-                String fechaFormateada = (String) datePAsignacion.getValue().format(formato);
-                if (fechaFormateada != null)
-                {
-                    System.out.println(fechaFormateada);
-                }
-            }
-
+            actualizarTabla();
+//            if(datePAsignacion.getValue() != null){
+//                fechaFormateada = app.formatearFecha(datePAsignacion.getValue());
+//                if (fechaFormateada != null)
+//                {
+////
+////                    llenarTablaAsignados(cursoSeleccionado, fechaFormateada);
+//                }
+//            }
         });
-
     }
-
 }
