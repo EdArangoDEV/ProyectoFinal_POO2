@@ -1,13 +1,10 @@
 package edu.actividad1.poo2.proyectofinal_poo2.controladores;
 
 import edu.actividad1.poo2.proyectofinal_poo2.Application;
-import edu.actividad1.poo2.proyectofinal_poo2.modelos.Asignacion;
 import edu.actividad1.poo2.proyectofinal_poo2.modelos.Cursos;
 import edu.actividad1.poo2.proyectofinal_poo2.modelos.PruebaAsignacion;
-import javafx.beans.InvalidationListener;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,12 +15,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
-import javax.swing.event.ChangeEvent;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
+
 
 public class AsignacionController {
 
@@ -84,14 +77,6 @@ public class AsignacionController {
     @FXML
     private ListView<?> listCursos;
 
-//    ArrayList<String> listaCursos = new ArrayList<String>();
-//    public ObservableList listaCursos = FXCollections.observableArrayList("Matematica I",
-//        "Algoritmos I",
-//        "Logica de programacion I",
-//        "Ingles I",
-//        "UML",
-//        "Base de Datos I",
-//        "POO I");
     public ObservableList listaCursos = Cursos.listaCursos.listaCursos;
 
     @FXML
@@ -135,6 +120,8 @@ public class AsignacionController {
         this.app = main;
     }
 
+    ValidacionTextFields vtxtF = new ValidacionTextFields();
+
     @FXML
     void clicAsignar(ActionEvent event) {
         if(datos && !btnAsignar.isDisable())
@@ -159,22 +146,6 @@ public class AsignacionController {
         }
     }
 
-    public void asignacionEstudiante(String solvencia){
-
-        for (String curso : listaAsignados)
-        {
-            PruebaAsignacion pAsignacion = new PruebaAsignacion();
-            pAsignacion.setCarnet(txtFieldCarnet.getText());
-            pAsignacion.setNombre(txtFieldNombre.getText());
-            pAsignacion.setCorreo(txtFieldCorreo.getText());
-            pAsignacion.setFechaAsignacion(app.formatearFecha(LocalDate.now()));
-            pAsignacion.setSolvencia(solvencia);
-            pAsignacion.setCurso(curso);
-            app.listaAsignaciones.add(pAsignacion);
-        }
-        System.out.println(app.listaAsignaciones.toArray());
-    }
-
 
     @FXML
     void clicCancelar(ActionEvent event) {
@@ -193,37 +164,51 @@ public class AsignacionController {
     boolean pago = false;
     String curso;
 
+    private void validarCamposEstudiante(Integer opcion){
+        boolean valido = false;
+
+        switch (opcion) {
+            case 1:
+                // Código a ejecutar si expresión == valor1
+                break;
+            case 2:
+                // Código a ejecutar si expresión == valor2
+                break;
+            case 3:
+                // Código a ejecutar si expresión == valor1
+                break;
+            case 4:
+                // Código a ejecutar si expresión == valor2
+                break;
+            case 5:
+                valido = vtxtF.validarString(txtFieldCorreo.getText(), 5);
+                if(valido){
+                    validarDatosEstudiante();
+                }
+                break;
+            default:
+                System.out.println("Opcion invalida!");
+        }
+
+    }
+
 
     private  void validarDatosEstudiante(){
-        boolean txtFNombre = txtFieldNombre.getText().trim().isEmpty();
+
+        boolean txtFNombre = txtFieldNombre.getText() == null;
 //        System.out.println(txtFNombre);
-        boolean txtFCarnet = txtFieldCarnet.getText().trim().isEmpty();
-        boolean txtFTel = txtFieldTel.getText().trim().isEmpty();
-        boolean txtFDireccion = txtFieldDireccion.getText().trim().isEmpty();
-        boolean txtFCorrero = txtFieldCorreo.getText().trim().isEmpty();
+        boolean txtFCarnet = txtFieldCarnet.getText() == null;
+        boolean txtFTel = txtFieldTel.getText() == null;
+        boolean txtFDireccion = txtFieldDireccion.getText() == null;
+        boolean txtFCorrero = txtFieldCorreo.getText() == null;
         boolean listaCursosAsig = listaCursos.isEmpty();
+
 
         pagar = (txtFNombre || txtFCarnet || txtFTel || txtFDireccion || txtFCorrero || listaCursosAsig) ? true : false;
         datos = !pagar;
         setCheckBPagar(pagar);
         setBotonAsignar();
     }
-
-    private void setCheckBPagar(boolean valor){
-        checkBPagar.setDisable(valor);
-    }
-
-    private void setElementosPago(boolean valor) {
-        lbNTarjeta.setDisable(valor);
-        txtFielNTarjeta.setDisable(valor);
-        lbTitular.setDisable(valor);
-        txtFieldTitular.setDisable(valor);
-        lbExpiracionT.setDisable(valor);
-        txtFieldExpiracionT.setDisable(valor);
-        lbCVC.setDisable(valor);
-        txtFieldCVC.setDisable(valor);
-    }
-
 
     private  void validarDatosPago(){
         boolean txtFTarjeta = txtFielNTarjeta.getText().trim().isEmpty();
@@ -234,6 +219,18 @@ public class AsignacionController {
 
         pago = (txtFTarjeta || txtFTitular || txtFExpiracion || txtFCVC) ? false : true;
         setBotonAsignar();
+    }
+
+
+    private void setElementosPago(boolean valor) {
+        lbNTarjeta.setDisable(valor);
+        txtFielNTarjeta.setDisable(valor);
+        lbTitular.setDisable(valor);
+        txtFieldTitular.setDisable(valor);
+        lbExpiracionT.setDisable(valor);
+        txtFieldExpiracionT.setDisable(valor);
+        lbCVC.setDisable(valor);
+        txtFieldCVC.setDisable(valor);
     }
 
 
@@ -258,26 +255,50 @@ public class AsignacionController {
         }
     }
 
+    private void setCheckBPagar(boolean valor){
+        checkBPagar.setDisable(valor);
+    }
+
+
+    public void asignacionEstudiante(String solvencia){
+
+        for (String curso : listaAsignados)
+        {
+            PruebaAsignacion pAsignacion = new PruebaAsignacion();
+            pAsignacion.setCarnet(txtFieldCarnet.getText());
+            pAsignacion.setNombre(txtFieldNombre.getText());
+            pAsignacion.setCorreo(txtFieldCorreo.getText());
+            pAsignacion.setFechaAsignacion(app.formatearFecha(LocalDate.now()));
+            pAsignacion.setSolvencia(solvencia);
+            pAsignacion.setCurso(curso);
+            app.listaAsignaciones.add(pAsignacion);
+        }
+        System.out.println(app.listaAsignaciones.toArray());
+    }
+
+
     private void setBCancelar(boolean valor){
         btnCancelar.setDisable(valor);
     }
 
     private void limpiarDatos() {
-        txtFieldNombre.setText("");
-        txtFieldCarnet.setText("");
-        txtFieldDireccion.setText("");
-        txtFieldTel.setText("");
-        txtFieldCorreo.setText("");
-        txtFielNTarjeta.setText("");
-        txtFieldTitular.setText("");
-        txtFieldExpiracionT.setText("");
-        txtFieldCVC.setText("");
+        txtFieldNombre.setText(null);
+        txtFieldCarnet.setText(null);
+        txtFieldDireccion.setText(null);
+        txtFieldTel.setText(null);
+        txtFieldCorreo.setText(null);
+        txtFielNTarjeta.setText(null);
+        txtFieldTitular.setText(null);
+        txtFieldExpiracionT.setText(null);
+        txtFieldCVC.setText(null);
         listaAsignados.clear();
     }
 
 
 
     public void initialize(){
+
+        limpiarDatos();
 
         // Deshabilitar boton Asingar
         setBotonAsignar();
@@ -294,24 +315,42 @@ public class AsignacionController {
 
 
         txtFieldNombre.focusedProperty().addListener((observable, antValue, nueValue) -> {
-                    validarDatosEstudiante();
-//                    boolean txtFNombre = !txtFieldNombre.getText().trim().isEmpty();
-//                    System.out.println(txtFNombre);
-                }
-            );
+//            validarDatosEstudiante();
+//            boolean txtFNombre = !txtFieldNombre.getText().trim().isEmpty();
+//            System.out.println(txtFNombre);
+            validarCamposEstudiante(1);
+            });
 
 
         txtFieldCarnet.focusedProperty().addListener((observable, antValue, nueValue) ->
-                validarDatosEstudiante());
+//                validarDatosEstudiante()
+            validarCamposEstudiante(2)
+        );
 
         txtFieldTel.focusedProperty().addListener((observable, antValue, nueValue) ->
-                validarDatosEstudiante());
+//                validarDatosEstudiante();
+                validarCamposEstudiante(3)
+        );
 
         txtFieldDireccion.focusedProperty().addListener((observable, antValue, nueValue) ->
-                validarDatosEstudiante());
+//                validarDatosEstudiante();
+                validarCamposEstudiante(4)
+        );
 
         txtFieldCorreo.focusedProperty().addListener((observable, antValue, nueValue) ->
-                validarDatosEstudiante());
+                {
+                    if(txtFieldCorreo.getText() != null && !nueValue){
+                        if(!txtFieldCorreo.getText().equals("")){
+//                            validarDatosEstudiante();
+                            validarCamposEstudiante(5);
+                        }
+                        else {
+                            txtFieldCorreo.setText(null);
+                            validarDatosEstudiante();
+                        }
+                    }
+                }
+        );
 
         txtFielNTarjeta.focusedProperty().addListener((observable, antValue, nueValue) ->
                 validarDatosPago());

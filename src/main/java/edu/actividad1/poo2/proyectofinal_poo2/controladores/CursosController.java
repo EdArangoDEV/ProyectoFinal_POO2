@@ -1,7 +1,6 @@
 package edu.actividad1.poo2.proyectofinal_poo2.controladores;
 
 import edu.actividad1.poo2.proyectofinal_poo2.Application;
-import edu.actividad1.poo2.proyectofinal_poo2.modelos.Asignacion;
 import edu.actividad1.poo2.proyectofinal_poo2.modelos.Cursos;
 import edu.actividad1.poo2.proyectofinal_poo2.modelos.PruebaAsignacion;
 import javafx.collections.FXCollections;
@@ -14,8 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 
 public class CursosController {
 
@@ -264,6 +262,7 @@ public class CursosController {
             }
         });
 
+        //Añadir listener al DatePicker
         datePAsignacion.setOnAction(actionEvent -> {
             if(datePAsignacion.getValue() != null){
                 fechaFormateada = app.formatearFecha(datePAsignacion.getValue());
