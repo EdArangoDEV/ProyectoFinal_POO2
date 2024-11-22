@@ -21,14 +21,6 @@ public class Application extends javafx.application.Application {
     public Stage cursosStage;
     public Stage asignacionesStage;
 
-//    public ObservableList listaAsignados = FXCollections.observableArrayList();
-//    public ObservableList listaCursos = FXCollections.observableArrayList("Matematica I",
-//            "Algoritmos I",
-//            "Logica de programacion I",
-//            "Ingles I",
-//            "UML",
-//            "Base de Datos I",
-//            "POO I");
 
     @Override
     public void start(Stage stage) throws IOException {

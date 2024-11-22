@@ -288,7 +288,6 @@ public class AsignacionController {
         checkBPagar.selectedProperty().addListener((observable, antValue, nueValue) -> {
             setElementosPago(!nueValue);
             validarDatosPago();
-//            setBotonAsignar();
             //System.out.println("Valor anterior: " + antValue);
             //System.out.println("Nuevo valor: " + nueValue);
         });
@@ -328,7 +327,7 @@ public class AsignacionController {
 
         Label placehCursos = new Label("No hay Cursos para mostrar");
         placehCursos.setId(".placeholder-label");
-        Label placehAsignaciones = new Label("No hay Cursos asignados");
+        Label placehAsignaciones = new Label("No hay Cursos Seleccionados");
         placehAsignaciones.setId(".placeholder-label");
 
         listCursos.setPlaceholder(placehCursos);
@@ -372,13 +371,13 @@ public class AsignacionController {
             curso = (String) listCursos.getSelectionModel().getSelectedItem();
             if(curso != null) {
                 if (!listaAsignados.contains(curso)) {
-                    System.out.println("Curso seleccionado: " + curso);
+//                    System.out.println("Curso seleccionado: " + curso);
                     listaAsignados.add(curso);
                     listAsignados.setItems(listaAsignados);
                 } else {
-                    System.out.println("El curso ya está asignado: " + curso);
+//                    System.out.println("El curso ya está asignado: " + curso);
                 }
-                curso = "";
+                curso = null;
                 listCursos.getSelectionModel().clearSelection();
                 validarDatosEstudiante();
             }
@@ -389,7 +388,7 @@ public class AsignacionController {
         listAsignados.setOnMouseClicked(event -> {
             curso = (String) listAsignados.getSelectionModel().getSelectedItem();
             if (curso != null){
-                System.out.println("Curso seleccionado " + curso);
+//                System.out.println("Curso seleccionado " + curso);
                 if(listaAsignados.size() == 1)
                 {
                     listaAsignados.clear();
@@ -399,7 +398,7 @@ public class AsignacionController {
                 }
                 listAsignados.setItems(listaAsignados);
 
-                curso = "";
+                curso = null;
                 listAsignados.getSelectionModel().clearSelection();
                 validarDatosEstudiante();
             }
