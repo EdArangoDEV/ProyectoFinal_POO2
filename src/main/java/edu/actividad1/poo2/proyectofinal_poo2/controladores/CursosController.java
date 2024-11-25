@@ -137,8 +137,10 @@ public class CursosController {
 
     private void llenarTablaAsignados(String curso, String fecha){
         tablaAsignaciones.setItems(null);
-        System.out.println(curso);
-        System.out.println(fecha);
+//        System.out.println(curso);
+//        System.out.println(fecha);
+        graficoSolvencia.setData(FXCollections.observableArrayList());
+
         ObservableList listaFiltrados = FXCollections.observableArrayList();
         if (!listaAsignaciones.isEmpty()){
             ObservableList<PruebaAsignacion> listaFiltradosCurso = FXCollections.observableArrayList();
@@ -156,6 +158,7 @@ public class CursosController {
 
                     if (!listaFCursoFecha.isEmpty()){
                         tablaAsignaciones.setItems(listaFCursoFecha);
+                        llenarGraficoPie(listaFiltradosCurso, graficoSolvencia);
                     }
                     else {
                         tablaAsignaciones.setPlaceholder(new Label("No hay Estudiantes asignados al curso: " + curso + " y fecha: " + fecha));
@@ -169,6 +172,7 @@ public class CursosController {
                 listaFiltradosCurso = filtrarCursos(curso);
                 if (!listaFiltradosCurso.isEmpty()){
                     tablaAsignaciones.setItems(listaFiltradosCurso);
+                    llenarGraficoPie(listaFiltradosCurso, graficoSolvencia);
                 }
                 else {
                     tablaAsignaciones.setPlaceholder(new Label("No hay Estudiantes asignados al curso: " + curso));
@@ -188,43 +192,29 @@ public class CursosController {
         }
     }
 
+    private void llenarGraficoPie(ObservableList<PruebaAsignacion> listAsignados, PieChart graficoSolvencia){
 
-//    private void actualizarTabla(){
-//        ObservableList<PruebaAsignacion> listaFiltradosCurso = filtrarCursos();
-//        ObservableList<PruebaAsignacion> listaFiltradosFecha = filtrarFechas();
-//
-//        if (datePAsignacion.getValue() != null) {
-//            fechaFormateada = app.formatearFecha(datePAsignacion.getValue());
-//        }
-//        if (comboBCursos.getValue() != null){
-//            cursoSeleccionado = (String) comboBCursos.getValue();
-//        }
-//
-//        ObservableList<PruebaAsignacion> listaAsignadosFiltrados = FXCollections.observableArrayList();
-//
-//
-//        if (listaFiltradosCurso.isEmpty() && listaFiltradosFecha.isEmpty()){
-//            // Si ambos están vacíos, no hay nada que mostrar
-//            tablaAsignaciones.setItems(FXCollections.observableArrayList());
-////            tablaAsignaciones.setPlaceholder(new Label("No hay Estudiantes asignados al curso: " + cursoSeleccionado + " y fecha: " + fechaFormateada));
-//        } else if (listaFiltradosCurso.isEmpty()) {
-//            // Solo mostrar los filtrados por fecha
-//            tablaAsignaciones.setItems(listaFiltradosFecha);
-//
-//        } else if (listaFiltradosFecha.isEmpty()) {
-//            // Solo mostrar los filtrados por curso
-//            tablaAsignaciones.setItems(listaFiltradosCurso);
-//
-//        } else if (!listaFiltradosCurso.isEmpty() && !listaFiltradosFecha.isEmpty()) {
-//            // Intersección de ambos resultados
-//            for (PruebaAsignacion asignado : listaFiltradosCurso) {
-//                if (listaFiltradosFecha.contains(asignado)) {
-//                    listaAsignadosFiltrados.add(asignado);
-//                    tablaAsignaciones.setItems(listaAsignadosFiltrados);
-//                }
-//            }
-//        }
-//    }
+        ObservableList<PieChart.Data> graficoPieSolvencia = FXCollections.observableArrayList();
+
+        int totalSolventes = 0;
+        int totalNoSolventes = 0;
+
+        for (PruebaAsignacion estudiante : listAsignados) {
+            String solvencia = estudiante.getSolvencia().toLowerCase();
+            if (solvencia.equals("si")) {
+                totalSolventes ++;
+            } else {
+                totalNoSolventes ++;
+            }
+        }
+
+        // Agregar los totales al gráfico
+        graficoPieSolvencia.add(new PieChart.Data("Total Solventes " + totalSolventes, totalSolventes));
+        graficoPieSolvencia.add(new PieChart.Data("Total No Solventes " + totalNoSolventes, totalNoSolventes));
+
+        graficoSolvencia.setData(graficoPieSolvencia);
+    }
+
 
     private void limpiarCampos(){
         cursoSeleccionado = null;
@@ -234,9 +224,10 @@ public class CursosController {
         datePAsignacion.setValue(null);
         tablaAsignaciones.setItems(null);
         tablaAsignaciones.setPlaceholder(new Label(pholderTablaInicio));
+        graficoSolvencia.setData(FXCollections.observableArrayList());
 
-        System.out.println(cursoSeleccionado);
-        System.out.println(fechaFormateada);
+//        System.out.println(cursoSeleccionado);
+//        System.out.println(fechaFormateada);
     }
 
     public void initialize(){
